@@ -548,7 +548,10 @@ angular.module('ngAnimate', ['ng'])
           done();
         } else {
           var activeClassName = '';
-          $timeout(startAnimation, 1, false);
+          // force the browser to do a reflow before starting the animation
+          // this will make sure that transitions are applied correctly
+          element.prop('clientWidth');
+          startAnimation();
 
           //this acts as the cancellation function in case
           //a new animation is triggered while another animation
